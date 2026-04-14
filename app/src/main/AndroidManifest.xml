@@ -65,6 +65,14 @@
         <activity
             android:name=".view.ListingFormActivity"
             android:exported="false"/>
+
+        <activity
+            android:name=".view.ContactListActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".view.ContactFormActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

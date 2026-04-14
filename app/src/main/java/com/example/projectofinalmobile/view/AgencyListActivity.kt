@@ -91,6 +91,7 @@ class AgencyListActivity : AppCompatActivity() {
     }
 
     private fun irADetalle(agency: AgencyResponse) {
+        Log.d("AgencyList", "Click en agencia: ${agency.id} - ${agency.name}")
         val intent = Intent(this, AgencyDetailActivity::class.java)
         intent.putExtra("agency_id", agency.id)
         startActivity(intent)

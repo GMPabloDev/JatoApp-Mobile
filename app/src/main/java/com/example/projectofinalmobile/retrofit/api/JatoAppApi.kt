@@ -4,6 +4,7 @@ import com.example.projectofinalmobile.retrofit.request.LoginRequest
 import com.example.projectofinalmobile.retrofit.request.RegisterRequest
 import com.example.projectofinalmobile.retrofit.request.CreateAgencyRequest
 import com.example.projectofinalmobile.retrofit.request.CreateListingRequest
+import com.example.projectofinalmobile.retrofit.request.CreateContactRequest
 import com.example.projectofinalmobile.retrofit.request.ToggleFavoriteRequest
 import com.example.projectofinalmobile.retrofit.response.LoginResponse
 import com.example.projectofinalmobile.retrofit.response.RegisterResponse
@@ -18,6 +19,8 @@ import com.example.projectofinalmobile.retrofit.response.ListingListResponse
 import com.example.projectofinalmobile.retrofit.response.ListingDetailResponse
 import com.example.projectofinalmobile.retrofit.response.CreateListingResponse
 import com.example.projectofinalmobile.retrofit.response.DeleteListingResponse
+import com.example.projectofinalmobile.retrofit.response.ContactListResponse
+import com.example.projectofinalmobile.retrofit.response.CreateContactResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -83,4 +86,20 @@ interface JatoAppApi {
 
     @GET("favorites/check")
     fun checkFavorite(@Query("agencyId") agencyId: Int): Call<CheckFavoriteResponse>
+
+    // Contacts
+    @POST("contacts")
+    fun createContact(@Body request: CreateContactRequest): Call<CreateContactResponse>
+
+    @GET("contacts/my-received")
+    fun getContactsReceived(
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 20
+    ): Call<ContactListResponse>
+
+    @GET("contacts/my-sent")
+    fun getContactsSent(
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 20
+    ): Call<ContactListResponse>
 }

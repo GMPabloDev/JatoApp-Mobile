@@ -115,6 +115,35 @@
                 app:cornerRadius="12dp"
                 app:backgroundTint="#FF9800"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="MENSAJES"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#666666"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRecibidos"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:text="MENSAJES RECIBIDOS"
+                android:textSize="16sp"
+                app:cornerRadius="8dp"
+                app:backgroundTint="#9C27B0"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEnviados"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:text="MENSAJES ENVIADOS"
+                android:textSize="16sp"
+                app:cornerRadius="8dp"
+                app:backgroundTint="#673AB7"/>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCerrarSesion"
                 android:layout_width="match_parent"

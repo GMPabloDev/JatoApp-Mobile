@@ -19,6 +19,8 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnAgencias.setOnClickListener(this)
         binding.btnAnuncios.setOnClickListener(this)
         binding.btnFavoritos.setOnClickListener(this)
+        binding.btnRecibidos.setOnClickListener(this)
+        binding.btnEnviados.setOnClickListener(this)
         binding.btnCerrarSesion.setOnClickListener(this)
         cargarDatosUsuario()
     }
@@ -34,6 +36,16 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btnAgencias -> startActivity(Intent(this, AgencyListActivity::class.java))
             R.id.btnAnuncios -> startActivity(Intent(this, ListingListActivity::class.java))
             R.id.btnFavoritos -> startActivity(Intent(this, FavoriteListActivity::class.java))
+            R.id.btnRecibidos -> {
+                val intent = Intent(this, ContactListActivity::class.java)
+                intent.putExtra("is_received", true)
+                startActivity(intent)
+            }
+            R.id.btnEnviados -> {
+                val intent = Intent(this, ContactListActivity::class.java)
+                intent.putExtra("is_received", false)
+                startActivity(intent)
+            }
             R.id.btnCerrarSesion -> cerrarSesion()
         }
     }

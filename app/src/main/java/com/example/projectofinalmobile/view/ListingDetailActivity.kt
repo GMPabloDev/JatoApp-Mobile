@@ -1,10 +1,10 @@
 package com.example.projectofinalmobile.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectofinalmobile.adapter.ImagePagerAdapter
 import com.example.projectofinalmobile.databinding.ActivityListingDetailBinding
 import com.example.projectofinalmobile.retrofit.ClienteRetrofit
@@ -20,6 +20,8 @@ import java.util.Locale
 class ListingDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityListingDetailBinding
     private var listingId: Int = 0
+    private var listingTitle: String = ""
+    private var listingPrice: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +78,9 @@ class ListingDetailActivity : AppCompatActivity() {
         val priceFormatted = NumberFormat.getNumberInstance(Locale.US).format(listing.price)
         binding.tvPrice.text = "$$priceFormatted"
 
+        listingTitle = listing.title
+        listingPrice = listing.price
+
         val location = buildString {
             listing.address?.let { append(it) }
             listing.city?.let { if (isNotEmpty()) append(", ") ; append(it) }
@@ -108,7 +113,11 @@ class ListingDetailActivity : AppCompatActivity() {
         }
 
         binding.btnContact.setOnClickListener {
-            AppMensaje.enviarMensaje(binding.root, "Funcionalidad de contacto proximamente", TipoMensaje.INFO)
+            val intent = Intent(this, ContactFormActivity::class.java)
+            intent.putExtra("listing_id", listingId)
+            intent.putExtra("listing_title", listingTitle)
+            intent.putExtra("listing_price", listingPrice)
+            startActivity(intent)
         }
     }
 }

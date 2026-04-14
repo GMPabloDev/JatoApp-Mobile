@@ -19,8 +19,8 @@ import retrofit2.Response
 class ListingFormActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityListingFormBinding
 
-    private val priceTypes = listOf("VENTA", "ALQUILER")
-    private val propertyTypes = listOf("DEPARTAMENTO", "CASA", "TERRENO", "LOCAL", "OFICINA", "OTRO")
+    private val priceTypes = listOf("VENTA", "ALQUILER", "AMBOS")
+    private val propertyTypes = listOf("CASA", "DEPARTAMENTO", "TERRENO", "LOCAL_COMERCIAL", "OFICINA")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +75,18 @@ class ListingFormActivity : AppCompatActivity(), View.OnClickListener {
             binding.tilPropertyType.isFocusableInTouchMode = true
             binding.tilPropertyType.requestFocus()
             AppMensaje.enviarMensaje(binding.root, "Seleccione el tipo de propiedad", TipoMensaje.ERROR)
+        } else if (binding.etAddress.text.toString().trim().length < 5) {
+            binding.tilAddress.isFocusableInTouchMode = true
+            binding.tilAddress.requestFocus()
+            AppMensaje.enviarMensaje(binding.root, "La dirección debe tener al menos 5 caracteres", TipoMensaje.ERROR)
+        } else if (binding.etCity.text.toString().trim().length < 2) {
+            binding.tilCity.isFocusableInTouchMode = true
+            binding.tilCity.requestFocus()
+            AppMensaje.enviarMensaje(binding.root, "La ciudad debe tener al menos 2 caracteres", TipoMensaje.ERROR)
+        } else if (binding.etState.text.toString().trim().length < 2) {
+            binding.tilState.isFocusableInTouchMode = true
+            binding.tilState.requestFocus()
+            AppMensaje.enviarMensaje(binding.root, "El estado debe tener al menos 2 caracteres", TipoMensaje.ERROR)
         } else {
             binding.progressBar.visibility = View.VISIBLE
             binding.btnCrear.isEnabled = false
@@ -101,8 +113,9 @@ class ListingFormActivity : AppCompatActivity(), View.OnClickListener {
                 bathrooms = bathrooms,
                 parkingSpaces = parking,
                 area = area,
-                address = binding.etAddress.text.toString().trim().ifEmpty { null },
-                city = binding.etCity.text.toString().trim().ifEmpty { null },
+                address = binding.etAddress.text.toString().trim(),
+                city = binding.etCity.text.toString().trim(),
+                state = binding.etState.text.toString().trim(),
                 neighborhood = binding.etNeighborhood.text.toString().trim().ifEmpty { null },
                 images = if (images.isNotEmpty()) images else null
             )

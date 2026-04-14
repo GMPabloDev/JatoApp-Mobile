@@ -3,11 +3,8 @@ package com.example.projectofinalmobile.view
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.projectofinalmobile.R
 import com.example.projectofinalmobile.databinding.ActivityAgencyDetailBinding
 import com.example.projectofinalmobile.retrofit.ClienteRetrofit
@@ -29,17 +26,13 @@ class AgencyDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         binding = ActivityAgencyDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
         agencyId = intent.getIntExtra("agency_id", 0)
+        Log.d("AgencyDetail", "agencyId recibido: $agencyId")
         if (agencyId == 0) {
+            AppMensaje.enviarMensaje(binding.root, "ID de agencia inválido", TipoMensaje.ERROR)
             finish()
             return
         }
